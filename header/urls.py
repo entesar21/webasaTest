@@ -13,5 +13,4 @@ router.register('logo',LogoViewSet)
 
 urlpatterns = [
     url('',include(router.urls)),
-
 ]
