@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'rest_framework_simplejwt',
 
     'footer',
     'sliders',
     'header',
     'course',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -91,6 +93,7 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -133,3 +136,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'store_image')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+
+}

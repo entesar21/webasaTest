@@ -24,6 +24,7 @@ urlpatterns = [
     path('sliders/', include('sliders.urls')),
     path('header/', include('header.urls')),
     path('course/', include('course.urls')),
+    path('users/', include('users.urls')),
 
 ]
 
