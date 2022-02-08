@@ -6,6 +6,9 @@ from django.db.models.signals import pre_save,post_save
 
 class CourseCategory(models.Model):
     course_category = models.CharField(max_length=100)
+    course_category_image = models.ImageField(upload_to='store_image/course_category_image/', null=True, blank=True)
+    course_description = models.TextField(default='', null=True, blank=True)
+
 
     def __str__(self):
         return self.course_category

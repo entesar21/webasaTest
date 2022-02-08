@@ -5,11 +5,11 @@ from rest_framework.response import Response
 from rest_framework import permissions
 
 
-from .serializers import CourseSerializer
-from .models import Course
+from .serializers import *
+from .models import *
 
+from django.db.models import Sum
 
-# Create your views here.
 
 class ShowCourse(APIView):
     def get(self,request):
@@ -27,4 +27,29 @@ class AddCourse(APIView):
             serializers.save()
             return Response(serializers.data,status=status.HTTP_201_CREATED)
         return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+class NumberOfCourses(APIView):
+    def get(self, request):
+        query = Course.objects.count()
+        serializers = CourseSerializer(query)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+
+
+class SumCourseDuration(APIView):
+    def get(self, request):
+        query = Course.objects.aggregate(Sum('course_duration'))
+        serializers = CourseSerializer(query)
+        return Response(serializers.data, status=status.HTTP_200_OK)
+
+
+class ShowCourseCategory(APIView):
+    def get(self,request):
+        query=CourseCategory.objects.all()
+        serializers=CourseCategorySerializer(query,many=True,context={ 'request' : request})
+        return Response(serializers.data,status=status.HTTP_200_OK)
+
+
+
+
 
