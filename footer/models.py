@@ -1,7 +1,6 @@
 from django.db import models
-from datetime import datetime
+from django_jalali.db import models as jmodels
 
-# Create your models here.
 
 class Footer(models.Model):
     footer_about_us= models.TextField(default='default about us',blank=True,null=True)
@@ -15,6 +14,6 @@ class Footer(models.Model):
     footer_facebook = models.CharField(max_length=120,default='https://www.facebook.com/webasa',blank=True,null=True)
     footer_phone = models.IntegerField(default='02598653269',blank=True,null=True)
     footer_address = models.IntegerField(default='02598653269',blank=True,null=True)
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = jmodels.jDateTimeField(auto_now_add=True)
 
 

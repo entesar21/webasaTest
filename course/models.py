@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+from django_jalali.db import models as jmodels
 
 from django.dispatch import receiver
 from django.db.models.signals import pre_save,post_save
@@ -44,7 +45,7 @@ class Course(models.Model):
     course_level = models.CharField(max_length=100, choices=CourseLevel.choices, default=CourseLevel.BEGINNER)
     course_status = models.CharField(max_length=100, choices=CourseStatus.choices, default=CourseStatus.RUNNING)
     course_duration = models.DurationField(default=datetime.timedelta(hours=40))
-    course_start_date = models.DateTimeField(default=datetime.datetime.now)
+    course_start_date = jmodels.jDateTimeField(auto_now_add=True)
 
 
     def __str__(self):

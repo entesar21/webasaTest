@@ -11,6 +11,8 @@ from users.sender import send_otp
 
 from django.db.models.signals import post_save
 
+from django_jalali.db import models as jmodels
+
 class User(AbstractUser):
     pass
 
@@ -60,7 +62,7 @@ class OTPRequest(models.Model):
     channel = models.CharField(max_length=10,choices=OtpChannel.choices,default=OtpChannel.PHONE)
     receiver = models.CharField(max_length=50)
     password = models.CharField(max_length=4,default=generate_otp)
-    created = models.DateTimeField(auto_now_add=True,editable=False)
+    created = jmodels.jDateTimeField(auto_now_add=True,editable=False)
 #5 fifth
     objects=OTPManager()
 
@@ -80,7 +82,7 @@ class Profile(models.Model):
     gender = models.CharField(max_length=10,choices=Gender.choices,default=Gender.MALE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.TextField(default="جایی برای معرفی خودتان...",null=True,blank=True)
-    registration_date = models.DateTimeField(default=datetime.datetime.now)
+    registration_date = jmodels.jDateTimeField(auto_now_add=True)
 
 
 
