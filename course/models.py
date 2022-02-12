@@ -5,6 +5,8 @@ from django_jalali.db import models as jmodels
 from django.dispatch import receiver
 from django.db.models.signals import pre_save,post_save
 
+from users.models import User
+
 class CourseCategory(models.Model):
     course_category = models.CharField(max_length=100)
     course_category_image = models.ImageField(upload_to='store_image/course_category_image/', null=True, blank=True)
@@ -57,3 +59,38 @@ def calculate_course_discounted_price(sender,**kwargs):
     course.course_discounted_price = float(course.course_price)-(float(course.course_price)*float(course.course_discount_percent)/100)
 
 
+
+
+class Comment(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='course_comments')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_course_comments')
+    name = models.CharField(max_length=100)
+    email = models.EmailField(null=True)
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=False)
+    parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('-created',)
+
+    def __str__(self):
+        return "comment by {} on course {}".format(self.name,self.course)
+
+    # def children(self):
+    #     return Comment.objects.filter(parent=self)
+
+    # @property
+    # def is_parent(self):
+    #     if self.parent is not None:
+    #         return False
+    #     return True
+
+
+class Vote(models.Model):
+    comment = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    voter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='course_vote')
+
+    def __str__(self):
+        return self.voter.username + ' voted on ' + self.comment.course.course_title

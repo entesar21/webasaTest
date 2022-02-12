@@ -15,7 +15,6 @@ from django_jalali.db import models as jmodels
 
 class User(AbstractUser):
     pass
-
 #8
 class OtpRequestQuerySet(models.QuerySet):
     def is_valid(self,receiver,request,password):
@@ -39,7 +38,6 @@ class OTPManager(models.Manager):
     def is_valid(self, receiver, request, password):
         return self.get_queryset().is_valid(receiver,request,password)
 
-
 #4 fourth this one
     def generate(self, data):
         otp = self.model(channel=data['channel'], receiver=data['receiver'])
@@ -62,11 +60,9 @@ class OTPRequest(models.Model):
     channel = models.CharField(max_length=10,choices=OtpChannel.choices,default=OtpChannel.PHONE)
     receiver = models.CharField(max_length=50)
     password = models.CharField(max_length=4,default=generate_otp)
-    created = jmodels.jDateTimeField(auto_now_add=True,editable=False)
+    created = models.DateTimeField(auto_now_add=True,editable=False)
 #5 fifth
     objects=OTPManager()
-
-
 
 #------------------------------------PROFILE---------------------------------------------#
 

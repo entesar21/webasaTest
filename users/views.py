@@ -23,9 +23,9 @@ class OTPView(APIView):
         serializer = VerifyOtpRequestSerializer(data=request.data)
         if serializer.is_valid():
             data = serializer.validated_data
-            # print(data['receiver'])
-            # print(data['request_id'])
-            # print(data['password'])
+            print(data['receiver'])
+            print(data['request_id'])
+            print(data['password'])
             if OTPRequest.objects.is_valid(data['receiver'], data['request_id'], data['password']):
                 print('accepted and we are passed')
                 return Response(self._handle_login(data))

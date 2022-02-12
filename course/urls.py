@@ -7,4 +7,6 @@ urlpatterns = [
     path('number_of_courses/', NumberOfCourses.as_view()),
     path('sum_course_duration/', SumCourseDuration.as_view()),
     path('show_course_category/', ShowCourseCategory.as_view()),
+    path('comments/<int:pk>', CommentRelatedToCourse.as_view()),
+    path('comments/<int:pk>/vote', VoteCreate.as_view()),
 ]
