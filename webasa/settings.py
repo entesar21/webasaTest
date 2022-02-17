@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-ht&-g6#z5kd+3jvy41joq266z%g=@*jp*1f+^a7#za2@mc96q&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://164.132.213.130', 'localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'course',
     'users',
     'blog',
+    'shop_cart',
 ]
 
 MIDDLEWARE = [

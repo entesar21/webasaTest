@@ -18,6 +18,8 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from shop_cart.views import CartAPI
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('footer/', include('footer.urls')),
@@ -26,7 +28,7 @@ urlpatterns = [
     path('course/', include('course.urls')),
     path('users/', include('users.urls')),
     path('blog/', include('blog.urls')),
-
+    path('cart/', CartAPI.as_view())
 ]
 
 
