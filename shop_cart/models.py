@@ -2,10 +2,7 @@ from django.db import models
 from users.models import User
 from course.models import Course
 
-from django.db.models import F, Sum, Max
-
-def total_price(self):
-    return self.objects.aggregate(Sum('product__course_discounted_price'))
+from django.db.models import Sum
 
 class Cart(models.Model):
     cart_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
