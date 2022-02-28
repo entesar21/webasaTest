@@ -49,8 +49,8 @@ class OTPView(APIView):
         refresh =RefreshToken.for_user(user)
 
         return ObtainTokenSerializer({
-            'refresh': str(refresh),
-            'token': str(refresh.access_token),
+            'refresh': refresh,
+            'token': refresh.access_token,
             'created': created
 
         }).data
