@@ -93,4 +93,3 @@ def save_profile_user(sender, **kwargs):
         profile_user.save()
 
 post_save.connect(save_profile_user, sender=User)
-

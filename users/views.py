@@ -75,13 +75,13 @@ class ProfileApi(APIView):
         return Response(serializers.data,status=status.HTTP_200_OK)
 
 class ProfileEditApi(APIView):
-    def patch(self,request,pk):
-        print(Profile.objects.get(user__id=pk))
-        profile_obj = Profile.objects.get(user__id=pk)
+    def patch(self,request):
+        print(Profile.objects.get(user=request.user))
+        profile_obj = Profile.objects.get(user=request.user)
         data=request.data
 
         try:
-            user=User.objects.get(id=pk)
+            user=User.objects.get(id=request.user.id)
             user.first_name = data.get("user.first_name", user.first_name)
             user.last_name = data.get("user.last_name", user.last_name)
             user.email = data.get("user.email", user.email)
